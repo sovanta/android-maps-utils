@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'signing'
+apply plugin: 'com.github.dcendents.android-maven'
 
 archivesBaseName = 'android-maps-utils'
-group = 'com.google.maps.android'
+group = 'com.github.sovanta'
 
 dependencies {
     compile 'com.google.android.gms:play-services-maps:9.6.1'
@@ -56,16 +57,12 @@ task apklib(type: Zip) {
 }
 
 artifacts {
-    archives apklib
+    archives sourcesJar
 }
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
-}
-
-signing {
-    sign configurations.archives
 }
 
 if (!hasProperty("sonatypeUsername")) {
